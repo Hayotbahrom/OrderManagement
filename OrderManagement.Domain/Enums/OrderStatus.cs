@@ -4,7 +4,10 @@ using System.Text;
 
 namespace OrderManagement.Domain.Enums
 {
-    internal class OrderStatus
+    public enum OrderStatus
     {
+        New = 0,
+        Completed = 1,
+        Cancelled = 2
     }
 }
