@@ -12,8 +12,8 @@ using OrderManagement.Data.Contexts;
 namespace OrderManagement.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260810142254_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260810192412_SeedInitialData")]
+    partial class SeedInitialData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -56,6 +56,32 @@ namespace OrderManagement.Data.Migrations
                     b.HasIndex("Status");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 8, 5, 11, 30, 0, 0, DateTimeKind.Utc),
+                            CustomerName = "Aziz Karimov",
+                            Status = "Completed",
+                            TotalAmount = 2786.50m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 8, 8, 14, 15, 0, 0, DateTimeKind.Utc),
+                            CustomerName = "Dilnoza Rahimova",
+                            Status = "Completed",
+                            TotalAmount = 180.00m
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2026, 8, 10, 10, 0, 0, 0, DateTimeKind.Utc),
+                            CustomerName = "Sardor Toshev",
+                            Status = "New",
+                            TotalAmount = 191.00m
+                        });
                 });
 
             modelBuilder.Entity("OrderManagement.Domain.Entities.OrderItem", b =>
@@ -85,6 +111,40 @@ namespace OrderManagement.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderItems");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OrderId = 1,
+                            Price = 1250.00m,
+                            ProductId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OrderId = 1,
+                            Price = 95.50m,
+                            ProductId = 2,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            OrderId = 2,
+                            Price = 180.00m,
+                            ProductId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            OrderId = 3,
+                            Price = 95.50m,
+                            ProductId = 2,
+                            Quantity = 2
+                        });
                 });
 
             modelBuilder.Entity("OrderManagement.Domain.Entities.Product", b =>
@@ -114,6 +174,32 @@ namespace OrderManagement.Data.Migrations
                     b.HasIndex("Name");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2026, 8, 1, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Lenovo ThinkPad X1",
+                            Price = 1250.00m,
+                            StockQuantity = 13
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2026, 8, 1, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Logitech MX Master 3",
+                            Price = 95.50m,
+                            StockQuantity = 35
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2026, 8, 1, 9, 0, 0, 0, DateTimeKind.Utc),
+                            Name = "Keychron K2",
+                            Price = 180.00m,
+                            StockQuantity = 24
+                        });
                 });
 
             modelBuilder.Entity("OrderManagement.Domain.Entities.OrderItem", b =>
