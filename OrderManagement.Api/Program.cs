@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using OrderManagement.Data.Contexts;
+
 namespace OrderManagement.Api
 {
     public class Program
@@ -10,8 +13,12 @@ namespace OrderManagement.Api
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+            
             builder.Services.AddEndpointsApiExplorer();
+            
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
