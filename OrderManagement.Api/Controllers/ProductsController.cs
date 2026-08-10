@@ -14,7 +14,7 @@ public class ProductsController(IProductService productService) : ControllerBase
     public async Task<IActionResult> CreateAsync([FromBody] ProductCreateDto dto)
     {
         var result = await _productService.AddAsync(dto);
-        return CreatedAtAction(nameof(GetByIdAsync), new { id = result.Id }, result);
+        return Ok(result);
     }
 
     [HttpGet]
