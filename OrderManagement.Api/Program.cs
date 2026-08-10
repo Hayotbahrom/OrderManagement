@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using OrderManagement.Api.Extentions;
 using OrderManagement.Data.Contexts;
 
 namespace OrderManagement.Api
@@ -20,6 +21,8 @@ namespace OrderManagement.Api
             builder.Services.AddEndpointsApiExplorer();
             
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddServiceExtention();
 
             var app = builder.Build();
 
