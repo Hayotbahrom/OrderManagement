@@ -15,5 +15,6 @@ public static class ServiceExtention
         //services
         service.AddScoped<IOrderService, OrderService>();
         service.AddScoped<IProductService, ProductService>();
+        service.AddScoped<IReportService, ReportService>();
     }
 }
