@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using OrderManagement.Api.Extentions;
+using OrderManagement.Api.Middlewares;
 using OrderManagement.Data.Contexts;
 
 namespace OrderManagement.Api
@@ -17,7 +18,14 @@ namespace OrderManagement.Api
 
             builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            builder.Services.AddControllers()
+                    .AddJsonOptions(options =>
+                    {
+                        options.JsonSerializerOptions.Converters.Add(
+                            new System.Text.Json.Serialization.JsonStringEnumConverter());
+                    });
+
             builder.Services.AddEndpointsApiExplorer();
             
             builder.Services.AddSwaggerGen();
@@ -25,6 +33,8 @@ namespace OrderManagement.Api
             builder.Services.AddServiceExtention();
 
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
